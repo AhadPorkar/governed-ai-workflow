@@ -1,0 +1,12 @@
+{
+  "status": "BLOCKED_BY_ENVIRONMENT",
+  "nativeNavigationError": "net::ERR_BLOCKED_BY_ADMINISTRATOR",
+  "workaround": "Explicit GOV_UI_TRANSPORT=harness. Uses unmodified UI in Chromium and real Java API through a Python bridge.",
+  "notVerified": [
+    "native navigation",
+    "browser fetch/CORS enforcement",
+    "CSP enforcement",
+    "native localStorage isolation"
+  ],
+  "attemptLog": "native-browser-attempt.log"
+}

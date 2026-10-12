@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='utf-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="Definitions_governance" targetNamespace="https://ahadporkar.com/governance" exporter="Governed AI reference overlay" exporterVersion="1.1.0-rc.1">
+  <bpmn:message id="Message_case" name="GovernanceCaseOpened" />
+  <bpmn:message id="Message_decision" name="GovernanceDecisionRecorded">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="= caseId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:error id="Error_grant" name="Stored authorization invalid" errorCode="GOV_AUTHORIZATION_INVALID" />
+  <bpmn:process id="governed-order-exception" name="Governed order exception - sandbox" isExecutable="true">
+    <bpmn:documentation>Portfolio release candidate. Independent sandbox ledger only. Core validates approval even if process variables are forged. This BPMN is statically checked; engine deployment is a release gate.</bpmn:documentation>
+    <bpmn:startEvent id="Start_case" name="Exception received">
+      <bpmn:outgoing>Flow_start</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="Start_message" messageRef="Message_case" />
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Task_plan" name="Investigate and validate">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="governance-plan" retries="5" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_start</bpmn:incoming>
+      <bpmn:outgoing>Flow_planned</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_proposal" name="Review required?" default="Flow_manual">
+      <bpmn:incoming>Flow_planned</bpmn:incoming>
+      <bpmn:outgoing>Flow_review</bpmn:outgoing>
+      <bpmn:outgoing>Flow_manual</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:receiveTask id="Task_wait" name="Independent review in console" messageRef="Message_decision">
+      <bpmn:incoming>Flow_review</bpmn:incoming>
+      <bpmn:outgoing>Flow_received</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:exclusiveGateway id="Gateway_decision" name="Approved?" default="Flow_declined">
+      <bpmn:incoming>Flow_received</bpmn:incoming>
+      <bpmn:outgoing>Flow_approved</bpmn:outgoing>
+      <bpmn:outgoing>Flow_declined</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_execute" name="Verify grant and commit sandbox effect">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="governance-execute" retries="5" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_approved</bpmn:incoming>
+      <bpmn:outgoing>Flow_committed</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="End_done" name="Receipt committed">
+      <bpmn:incoming>Flow_committed</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="End_manual" name="Human investigation; no effect">
+      <bpmn:incoming>Flow_manual</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="End_declined" name="Declined; no effect">
+      <bpmn:incoming>Flow_declined</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="Boundary_expiry" name="Review window elapsed" attachedToRef="Task_wait" cancelActivity="true">
+      <bpmn:outgoing>Flow_expiry</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="Timer_review">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT15M</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:serviceTask id="Task_expire" name="Invalidate expired grant">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="governance-expire" retries="5" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_expiry</bpmn:incoming>
+      <bpmn:outgoing>Flow_expired</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="End_expired" name="Expired; no effect">
+      <bpmn:incoming>Flow_expired</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="Boundary_invalid" name="Authorization invalid" attachedToRef="Task_execute" cancelActivity="true">
+      <bpmn:outgoing>Flow_invalid</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="Definition_invalid" errorRef="Error_grant" />
+    </bpmn:boundaryEvent>
+    <bpmn:endEvent id="End_invalid" name="Invalidated; investigate again">
+      <bpmn:incoming>Flow_invalid</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_start" sourceRef="Start_case" targetRef="Task_plan" />
+    <bpmn:sequenceFlow id="Flow_planned" sourceRef="Task_plan" targetRef="Gateway_proposal" />
+    <bpmn:sequenceFlow id="Flow_review" sourceRef="Gateway_proposal" targetRef="Task_wait" name="Review">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= outcome = "PENDING_APPROVAL"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_manual" sourceRef="Gateway_proposal" targetRef="End_manual" name="Blocked / escalated" />
+    <bpmn:sequenceFlow id="Flow_received" sourceRef="Task_wait" targetRef="Gateway_decision" />
+    <bpmn:sequenceFlow id="Flow_approved" sourceRef="Gateway_decision" targetRef="Task_execute" name="Yes">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= approved = true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_declined" sourceRef="Gateway_decision" targetRef="End_declined" name="No" />
+    <bpmn:sequenceFlow id="Flow_committed" sourceRef="Task_execute" targetRef="End_done" />
+    <bpmn:sequenceFlow id="Flow_expiry" sourceRef="Boundary_expiry" targetRef="Task_expire" />
+    <bpmn:sequenceFlow id="Flow_expired" sourceRef="Task_expire" targetRef="End_expired" />
+    <bpmn:sequenceFlow id="Flow_invalid" sourceRef="Boundary_invalid" targetRef="End_invalid" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_governance">
+    <bpmndi:BPMNPlane id="Plane_governance" bpmnElement="governed-order-exception">
+      <bpmndi:BPMNShape id="Start_case_di" bpmnElement="Start_case">
+        <dc:Bounds x="80" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_plan_di" bpmnElement="Task_plan">
+        <dc:Bounds x="170" y="140" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_proposal_di" bpmnElement="Gateway_proposal">
+        <dc:Bounds x="375" y="155" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_wait_di" bpmnElement="Task_wait">
+        <dc:Bounds x="490" y="140" width="185" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_decision_di" bpmnElement="Gateway_decision">
+        <dc:Bounds x="735" y="155" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_execute_di" bpmnElement="Task_execute">
+        <dc:Bounds x="850" y="140" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_done_di" bpmnElement="End_done">
+        <dc:Bounds x="1080" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_manual_di" bpmnElement="End_manual">
+        <dc:Bounds x="382" y="350" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_declined_di" bpmnElement="End_declined">
+        <dc:Bounds x="742" y="350" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Boundary_expiry_di" bpmnElement="Boundary_expiry">
+        <dc:Bounds x="590" y="202" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_expire_di" bpmnElement="Task_expire">
+        <dc:Bounds x="525" y="450" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_expired_di" bpmnElement="End_expired">
+        <dc:Bounds x="755" y="472" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Boundary_invalid_di" bpmnElement="Boundary_invalid">
+        <dc:Bounds x="945" y="202" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_invalid_di" bpmnElement="End_invalid">
+        <dc:Bounds x="1060" y="350" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_start_di" bpmnElement="Flow_start">
+        <di:waypoint x="116" y="180.0" />
+        <di:waypoint x="170" y="180.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_planned_di" bpmnElement="Flow_planned">
+        <di:waypoint x="330" y="180.0" />
+        <di:waypoint x="375" y="180.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_review_di" bpmnElement="Flow_review">
+        <di:waypoint x="425" y="180.0" />
+        <di:waypoint x="490" y="180.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_manual_di" bpmnElement="Flow_manual">
+        <di:waypoint x="400" y="205" />
+        <di:waypoint x="400" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_received_di" bpmnElement="Flow_received">
+        <di:waypoint x="675" y="180.0" />
+        <di:waypoint x="735" y="180.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_approved_di" bpmnElement="Flow_approved">
+        <di:waypoint x="785" y="180.0" />
+        <di:waypoint x="850" y="180.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_declined_di" bpmnElement="Flow_declined">
+        <di:waypoint x="760" y="205" />
+        <di:waypoint x="760" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_committed_di" bpmnElement="Flow_committed">
+        <di:waypoint x="1010" y="180.0" />
+        <di:waypoint x="1080" y="180.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_expiry_di" bpmnElement="Flow_expiry">
+        <di:waypoint x="608" y="238" />
+        <di:waypoint x="608" y="450" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_expired_di" bpmnElement="Flow_expired">
+        <di:waypoint x="685" y="490.0" />
+        <di:waypoint x="755" y="490.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_invalid_di" bpmnElement="Flow_invalid">
+        <di:waypoint x="963" y="238" />
+        <di:waypoint x="963" y="368" />
+        <di:waypoint x="1060" y="368" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

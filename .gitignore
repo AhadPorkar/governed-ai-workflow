@@ -1,0 +1,9 @@
+.local/
+build/
+__pycache__/
+*.pyc
+.venv/
+.env
+*.log
+!evidence/**/*.log
+.DS_Store

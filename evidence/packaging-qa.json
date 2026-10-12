@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-12T07:51:16.357559+00:00",
+  "overlayFiles": 77,
+  "newFilesOnlyPatch": {
+    "gitApplyCheck": true,
+    "appliedInEmptyTemporaryRepository": true,
+    "all77TargetsSha256Match": true,
+    "actualHostStackValidated": false
+  },
+  "attachmentUnchanged": true,
+  "countedIn167ApplicationChecks": false
+}

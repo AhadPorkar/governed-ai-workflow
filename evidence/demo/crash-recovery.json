@@ -1,0 +1,13 @@
+{
+  "status": "PASSED",
+  "scenario": "Real standalone worker halted after commit; real server killed/restarted; fresh worker replayed and acknowledged.",
+  "workerExitCode": 73,
+  "caseId": "40529f7b-9c7f-439c-9f3b-33bca43fd0f5",
+  "receiptId": "efd086f0-2ec3-4cee-ba80-7ae5792b0548",
+  "effects": 1,
+  "refundedCents": 12900,
+  "attempts": 2,
+  "jobState": "COMPLETED",
+  "sandbox": true,
+  "notClaimed": "Camunda worker fault injection or real payment-provider effect."
+}

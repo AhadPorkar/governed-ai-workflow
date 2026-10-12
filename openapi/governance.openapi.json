@@ -1,0 +1,704 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Governed AI Workflow - sandbox reference",
+    "version": "1.1.0-rc.1",
+    "description": "Strict bounded JSON API; static expiring bearer identities for demo only. Source package transport is tested; Spring adapter runtime acceptance remains open."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8095/api",
+      "description": "Independent local demo"
+    },
+    {
+      "url": "http://localhost:8081/governance/api",
+      "description": "Unverified Spring reference adapter"
+    }
+  ],
+  "security": [
+    {
+      "demoBearer": []
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "health",
+        "summary": "Public health and planner mode",
+        "description": "Required role: PUBLIC. Query parameters are not supported. This is a sandbox reference; execution never calls a real payment provider.",
+        "x-required-role": "PUBLIC",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    },
+                    "sandbox": {
+                      "const": true
+                    },
+                    "planner": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "version",
+                    "sandbox",
+                    "planner"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Stable application/transport error. Typical status: 400,401,403,404,409,413,415,429,500,503.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/session": {
+      "get": {
+        "operationId": "session",
+        "summary": "Authenticated identity and mode",
+        "description": "Required role: AUTHENTICATED. Query parameters are not supported. This is a sandbox reference; execution never calls a real payment provider.",
+        "x-required-role": "AUTHENTICATED",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Stable application/transport error. Typical status: 400,401,403,404,409,413,415,429,500,503.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard": {
+      "get": {
+        "operationId": "dashboard",
+        "summary": "Current tenant workspace",
+        "description": "Required role: READ. Query parameters are not supported. This is a sandbox reference; execution never calls a real payment provider.",
+        "x-required-role": "READ",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Stable application/transport error. Typical status: 400,401,403,404,409,413,415,429,500,503.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cases": {
+      "post": {
+        "operationId": "createCase",
+        "summary": "Create or idempotently return a case",
+        "description": "Required role: OPERATOR. Query parameters are not supported. This is a sandbox reference; execution never calls a real payment provider.",
+        "x-required-role": "OPERATOR",
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Case"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Stable application/transport error. Typical status: 400,401,403,404,409,413,415,429,500,503.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCase"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cases/{id}": {
+      "get": {
+        "operationId": "getCase",
+        "summary": "Read own-tenant case and evidence",
+        "description": "Required role: READ. Query parameters are not supported. This is a sandbox reference; execution never calls a real payment provider.",
+        "x-required-role": "READ",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Case"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Stable application/transport error. Typical status: 400,401,403,404,409,413,415,429,500,503.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/cases/{id}/plan": {
+      "post": {
+        "operationId": "planCase",
+        "summary": "Investigate; never approve or execute",
+        "description": "Required role: OPERATOR or WORKER. Query parameters are not supported. This is a sandbox reference; execution never calls a real payment provider.",
+        "x-required-role": "OPERATOR or WORKER",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Case"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Stable application/transport error. Typical status: 400,401,403,404,409,413,415,429,500,503.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cases/{id}/decisions": {
+      "post": {
+        "operationId": "decideCase",
+        "summary": "Independent decision bound to exact digest",
+        "description": "Required role: REVIEWER. Query parameters are not supported. This is a sandbox reference; execution never calls a real payment provider.",
+        "x-required-role": "REVIEWER",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Case"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Stable application/transport error. Typical status: 400,401,403,404,409,413,415,429,500,503.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Decision"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs": {
+      "get": {
+        "operationId": "readyJobs",
+        "summary": "Own-tenant ready execution jobs",
+        "description": "Required role: WORKER. Query parameters are not supported. This is a sandbox reference; execution never calls a real payment provider.",
+        "x-required-role": "WORKER",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Stable application/transport error. Typical status: 400,401,403,404,409,413,415,429,500,503.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{id}/run": {
+      "post": {
+        "operationId": "executeJob",
+        "summary": "Revalidate grant and commit/replay sandbox effect",
+        "description": "Required role: WORKER. Query parameters are not supported. This is a sandbox reference; execution never calls a real payment provider.",
+        "x-required-role": "WORKER",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Stable application/transport error. Typical status: 400,401,403,404,409,413,415,429,500,503.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{id}/ack": {
+      "post": {
+        "operationId": "acknowledgeJob",
+        "summary": "Acknowledge exact committed receipt",
+        "description": "Required role: WORKER. Query parameters are not supported. This is a sandbox reference; execution never calls a real payment provider.",
+        "x-required-role": "WORKER",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Stable application/transport error. Typical status: 400,401,403,404,409,413,415,429,500,503.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acknowledge"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "demoBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "opaque expiring demo token"
+      }
+    },
+    "schemas": {
+      "Proposal": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "REFUND",
+              "CANCEL",
+              "SWITCH_SUPPLIER",
+              "ESCALATE"
+            ]
+          },
+          "amountCents": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100000000
+          },
+          "supplierId": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "explanation": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1500
+          },
+          "citations": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "action",
+          "amountCents",
+          "supplierId",
+          "explanation",
+          "citations"
+        ],
+        "additionalProperties": false
+      },
+      "Case": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tenant": {
+            "type": "string"
+          },
+          "orderId": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "PLANNING",
+              "PENDING_APPROVAL",
+              "BLOCKED",
+              "ESCALATED",
+              "APPROVED",
+              "DECLINED",
+              "EXECUTED",
+              "EXPIRED",
+              "INVALIDATED"
+            ]
+          },
+          "request": {
+            "type": "string"
+          },
+          "proposal": {
+            "$ref": "#/components/schemas/Proposal"
+          },
+          "proposalDigest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "revision": {
+            "type": "integer"
+          },
+          "receipt": {
+            "$ref": "#/components/schemas/Receipt"
+          }
+        },
+        "required": [
+          "id",
+          "tenant",
+          "orderId",
+          "state"
+        ],
+        "additionalProperties": true
+      },
+      "Receipt": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "caseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "orderId": {
+            "type": "string"
+          },
+          "tenant": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "amountCents": {
+            "type": "integer"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "supplierId": {
+            "type": "string"
+          },
+          "committedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sandbox": {
+            "const": true
+          },
+          "proposalDigest": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "caseId",
+          "sandbox"
+        ],
+        "additionalProperties": true
+      },
+      "Problem": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "type",
+          "title",
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "CreateCase": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$"
+          },
+          "request": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          }
+        },
+        "required": [
+          "orderId",
+          "request"
+        ],
+        "additionalProperties": false
+      },
+      "Decision": {
+        "type": "object",
+        "properties": {
+          "proposalDigest": {
+            "type": "string",
+            "minLength": 64,
+            "maxLength": 64,
+            "description": "Exact value returned by the server."
+          },
+          "approve": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 600
+          }
+        },
+        "required": [
+          "proposalDigest",
+          "approve",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "Acknowledge": {
+        "type": "object",
+        "properties": {
+          "receiptId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "receiptId"
+        ],
+        "additionalProperties": false
+      },
+      "Empty": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+name: Governance reference contracts
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  offline-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5.6.0
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-browser.txt
+      - run: python -m playwright install --with-deps chromium
+      - name: Core, HTTP/process, native browser and repository checks
+        env:
+          GOV_UI_TRANSPORT: native
+          CHROMIUM_PATH: /not-a-system-browser
+        run: python scripts/test.py --browser --repository
+      - run: python scripts/evaluate.py --no-build
+# Does not claim Spring/Camunda/Kafka/PostgreSQL acceptance.
+# Pin reviewed action releases to immutable SHAs during the repository supply-chain review.

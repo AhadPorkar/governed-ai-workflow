@@ -1,0 +1,64 @@
+{
+  "release": "1.1.0-rc.1",
+  "collectedAt": "2026-10-12T07:43:16.883979+00:00",
+  "totalExecutedChecks": 167,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "layers": {
+    "javaContracts": {
+      "count": 106,
+      "status": "PASSED"
+    },
+    "realHttpAndProcesses": {
+      "count": 29,
+      "status": "PASSED"
+    },
+    "browserDomHarness": {
+      "count": 9,
+      "status": "PASSED_IN_EXPLICIT_HARNESS",
+      "nativeBrowserVerified": false
+    },
+    "repository": {
+      "count": 23,
+      "status": "PASSED"
+    }
+  },
+  "evaluation": {
+    "cases": 48,
+    "exactProposals": 33,
+    "acceptableDispositions": 40,
+    "provider": "deterministic-baseline",
+    "liveModelCalls": 0,
+    "effectsExecuted": 0
+  },
+  "recoveryDemo": {
+    "actualWorkerHalt": 73,
+    "actualServerRestart": true,
+    "effects": 1,
+    "attempts": 2,
+    "status": "PASSED"
+  },
+  "notExecuted": [
+    "host Maven build",
+    "Spring runtime integration",
+    "PostgreSQL Testcontainers",
+    "Kafka delivery and broker failure",
+    "Camunda BPMN deployment and worker crash",
+    "native browser navigation/network/CSP acceptance",
+    "live-model evaluation",
+    "Windows execution",
+    "production load/security/accessibility audit",
+    "real ERP/payment-provider effects"
+  ],
+  "artifacts": "tests/*.json and *.xml, tests/*-final.log, evaluation/baseline-results.json, demo/crash-recovery.json",
+  "sourceBoundary": "Uploaded RechnungFlow left unchanged. Additive overlay is not a merged/pinned host repository.",
+  "testCoveragePercent": "Not measured; no invented line/branch coverage.",
+  "environment": {
+    "python": "3.13.5",
+    "platform": "Linux",
+    "java": "openjdk version \"21.0.12.1\" 2026-08-18",
+    "mavenAvailable": false,
+    "dockerAvailable": false
+  }
+}

@@ -1,0 +1,722 @@
+{
+  "release": "1.1.0-rc.1",
+  "algorithm": "SHA-256",
+  "selfExcluded": "PACKAGE-MANIFEST.json",
+  "files": [
+    {
+      "path": ".github/workflows/governance-reference.yml",
+      "bytes": 1032,
+      "sha256": "ad72961eeb5ba29d74ccb9fdc4a71d62833dc0ed58aa0d62561de126e1533845"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 81,
+      "sha256": "f82437039a5ad34bb43369a442d14e0e1e3e4da4f60b830788864e52922cba4c"
+    },
+    {
+      "path": "CHANGE-MANIFEST.json",
+      "bytes": 22203,
+      "sha256": "b16135e2e756db847cd8fb56db921d8a80a4deab1bb3a1ebfd29cf1f266b3fc2"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 835,
+      "sha256": "179c0aefde47d849df40d922f7f30f5ce1e9eb67b7a0cca4b739f542b2908d22"
+    },
+    {
+      "path": "FILE-CHANGES.md",
+      "bytes": 10224,
+      "sha256": "0721c0e42e0e8dc84a0352540bd6c30d0189a8ecb84e811897b346d5beba8810"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1068,
+      "sha256": "8770d40134bfca7ba27f1167b54aa06ac81e36c3ed6ddd6b9ef1283edaf85f9c"
+    },
+    {
+      "path": "NOTICE.md",
+      "bytes": 847,
+      "sha256": "ae08f7265147cde41dcaf77a7784391dd0a47460b683dcf7be5959b2b14aa386"
+    },
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 1487,
+      "sha256": "560a8666fc8a1f04927bb7c9ea7e7fa3cff327fe3bebfc990031c1203e8e7beb"
+    },
+    {
+      "path": "README.de.md",
+      "bytes": 3078,
+      "sha256": "2358c20d26f785d27fe8f1b1ef4929fd381c976ee69a7d09e756fbe9eec0d2e6"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3149,
+      "sha256": "70c2a221536c50492516dfc3fe99127f10bc273c24c1b1082611579d40464da2"
+    },
+    {
+      "path": "SECURITY.md",
+      "bytes": 669,
+      "sha256": "bc5841f4eb9a5254258f3e18a0a7496976adad786cf7e6a743a336f2135f951d"
+    },
+    {
+      "path": "START-HERE.md",
+      "bytes": 3453,
+      "sha256": "5141b21ae5a0d9b032857aa1cb0b81d9384ada277d38f1937f6353f9562e4bd0"
+    },
+    {
+      "path": "demo/src/io/github/ahadporkar/ordertocash/governance/demo/DemoServer.java",
+      "bytes": 6722,
+      "sha256": "332d3e72810602b8910d0cd22593c03a5a41bd598d3909a2ca886ad8bfacd7c4"
+    },
+    {
+      "path": "demo/src/io/github/ahadporkar/ordertocash/governance/demo/EvaluationMain.java",
+      "bytes": 4109,
+      "sha256": "f32234a8f36139ceba71f959b8498a3a513cdf5622e3db1edc0fa2375019485e"
+    },
+    {
+      "path": "demo/src/io/github/ahadporkar/ordertocash/governance/demo/WorkerMain.java",
+      "bytes": 2739,
+      "sha256": "7da69db915a9d5186c8c2ed148a43c42c695188193439a9b26bfc6caa80d6e77"
+    },
+    {
+      "path": "docs/assets/login-de.png",
+      "bytes": 88497,
+      "sha256": "d6ddbc0a7362977e94d387896a578858e1fc449d9e1cd6271792f6a7241b5e15"
+    },
+    {
+      "path": "docs/assets/login-en.png",
+      "bytes": 80797,
+      "sha256": "81837676c7a95fef1c409c06f151ce1bcedc48893ce4a6b4adec637282ba3f03"
+    },
+    {
+      "path": "docs/assets/workspace-de-mobile.png",
+      "bytes": 155271,
+      "sha256": "b4237b5517500d4c5aa14bfaf63f06879d06701883929229f23174916e345874"
+    },
+    {
+      "path": "docs/assets/workspace-de.png",
+      "bytes": 190592,
+      "sha256": "5ee9556ad37d595cfb9434e712cb14e034c6044eecee227d5fbd91e8d4da439a"
+    },
+    {
+      "path": "docs/assets/workspace-en.png",
+      "bytes": 180606,
+      "sha256": "d1d011d86e64ea67ffd3c055490f242996ebd8528dd466019acd7ad5b33b9ed8"
+    },
+    {
+      "path": "docs/de/api.md",
+      "bytes": 4455,
+      "sha256": "e29a1d31a0a9375d1c2ded7af61a9cf41e0e97a5f11e2a7d447da92c563ae754"
+    },
+    {
+      "path": "docs/de/architecture.md",
+      "bytes": 4943,
+      "sha256": "79ef304e2c1490540a727b64f75abcff6cd72030612eb323162f72d18a33ad0d"
+    },
+    {
+      "path": "docs/de/decisions.md",
+      "bytes": 3673,
+      "sha256": "05ab3c810da26d7c02d38b0d51aa45d6f0529b04bc3c33b154b1fb6e78a7720d"
+    },
+    {
+      "path": "docs/de/demo.md",
+      "bytes": 3009,
+      "sha256": "f084d7d37c01472d93e48f8fdf3ce3978c5f26348de2609c47684c0000b75b10"
+    },
+    {
+      "path": "docs/de/evaluation.md",
+      "bytes": 4060,
+      "sha256": "92930043e54ed9d769d2ecc3f0165df2ccca873b9371f2bd6d9c567bc8d96d4f"
+    },
+    {
+      "path": "docs/de/integration.md",
+      "bytes": 5565,
+      "sha256": "a7484419c838946e95c93fb22e4c16aa05923ec9d1ecffeeddc7883d4741ef15"
+    },
+    {
+      "path": "docs/de/operations.md",
+      "bytes": 4850,
+      "sha256": "1f2e16bc4863aea8c6784d86272c59c9f91daa2a9cd48d7c790832e5325d7846"
+    },
+    {
+      "path": "docs/de/overview.md",
+      "bytes": 3839,
+      "sha256": "e81dfddad077b1be50c50f949dd6b0af42ca60aaa0f00d9b1cac0dbc0f008167"
+    },
+    {
+      "path": "docs/de/quickstart.md",
+      "bytes": 4377,
+      "sha256": "5cb69fa0662bbbc8d431f63a9bd159040e605ba2e25274e51745edff869631b2"
+    },
+    {
+      "path": "docs/de/release.md",
+      "bytes": 3834,
+      "sha256": "17c35c37ca300b21bc8967addc5021e6f7da260085572c8a1a8651b95f10e747"
+    },
+    {
+      "path": "docs/de/security.md",
+      "bytes": 4947,
+      "sha256": "988e9ae89792e8612ff514b05469a2a17b4602ca4dc31836b9cced5cbfc818e0"
+    },
+    {
+      "path": "docs/de/sources.md",
+      "bytes": 2912,
+      "sha256": "4c932224095033f6de090ad9435d3f843129849f46344d0323b3c0f9f58996c5"
+    },
+    {
+      "path": "docs/de/testing.md",
+      "bytes": 4477,
+      "sha256": "fd3e2a234ae8b1b7a2338e5009c43a330a4f01158eb449d33070fddc96d5bb17"
+    },
+    {
+      "path": "docs/en/api.md",
+      "bytes": 4607,
+      "sha256": "10bcaf2983c687893b22175b00047fc80503cbb4f63f1f8ea4cb9d20898b03b4"
+    },
+    {
+      "path": "docs/en/architecture.md",
+      "bytes": 5018,
+      "sha256": "acafed7327d01f2711419f9a32d0a76089ea89a7f9b382411934efe5fc64ee64"
+    },
+    {
+      "path": "docs/en/decisions.md",
+      "bytes": 3820,
+      "sha256": "903148fe32c946e136f3d4cb916e947eea766489759cbfc02da1cb0acea7f0ea"
+    },
+    {
+      "path": "docs/en/demo.md",
+      "bytes": 3077,
+      "sha256": "0ecff7de15600949862b2ff30232e81231dac809052606701f30c798db73adde"
+    },
+    {
+      "path": "docs/en/evaluation.md",
+      "bytes": 3932,
+      "sha256": "f6c61b95ad3483250073a7123ff8facfc89cfd29d0b53ec301d81f04dfd4ceb0"
+    },
+    {
+      "path": "docs/en/integration.md",
+      "bytes": 5625,
+      "sha256": "5f10b320de1f719eda145c34b8c87f07824d2bca0e87dccc092e9395b5858768"
+    },
+    {
+      "path": "docs/en/operations.md",
+      "bytes": 5337,
+      "sha256": "cb73403ac8e8ba6bf0feef316972b06669f0044a5666ab50d963843c22d4772c"
+    },
+    {
+      "path": "docs/en/overview.md",
+      "bytes": 3909,
+      "sha256": "e0d1deaba26d45195bc673d18d3746665bd90d92153e73a53cce1c37f364192d"
+    },
+    {
+      "path": "docs/en/quickstart.md",
+      "bytes": 4069,
+      "sha256": "b04928435215b5d86bf96126fe97c42f2d95c6dcd9ee44b670e8072cd05abba7"
+    },
+    {
+      "path": "docs/en/release.md",
+      "bytes": 3934,
+      "sha256": "c81e5fdb2b71aa846d5c46b2314611fe6081e4f249c4f6ffab113cd37aa6020c"
+    },
+    {
+      "path": "docs/en/security.md",
+      "bytes": 5399,
+      "sha256": "e682aa0012a5a65be49c92aede0d0e18ec909f63029321bcc5c26db23c64bb2e"
+    },
+    {
+      "path": "docs/en/sources.md",
+      "bytes": 3122,
+      "sha256": "21e6d9eb1a6b9e8cf235482d5cd8b573c3edbe47ea1f28fbb5649559a54bee45"
+    },
+    {
+      "path": "docs/en/testing.md",
+      "bytes": 4724,
+      "sha256": "9840220291cc15b9253e5604dc0d056b6348b9e63b6c8a50dc4bb8744c2be884"
+    },
+    {
+      "path": "evaluation/cases.json",
+      "bytes": 18399,
+      "sha256": "7a0ad9303a5d3186a4f4fd639953a7c17288487315c352341a637b682a96ddd7"
+    },
+    {
+      "path": "evidence/demo/crash-recovery.json",
+      "bytes": 475,
+      "sha256": "c79b10c6db66cf2e292a17395bb716fe53ecf843364533f8adb296467ceda69c"
+    },
+    {
+      "path": "evidence/environment/native-browser-attempt.log",
+      "bytes": 26058,
+      "sha256": "83877f8a20bf41a1347897ba425c969771bb65d71e3752def395fa5177657ae2"
+    },
+    {
+      "path": "evidence/environment/native-browser-status.json",
+      "bytes": 425,
+      "sha256": "aebd4cd67b0c35dd5d470af3aca2f579fddfcb946eab86cbc7c7cd2b920df062"
+    },
+    {
+      "path": "evidence/evaluation/baseline-results.json",
+      "bytes": 37144,
+      "sha256": "f01a7e169edf1ee7c439803887584255cbc6a05899566668856b2b8b054df800"
+    },
+    {
+      "path": "evidence/packaging-qa.json",
+      "bytes": 328,
+      "sha256": "91ee5c02385484c043395e99230b59ae2a1dcec0100062a3fba3bea515f750c2"
+    },
+    {
+      "path": "evidence/publication-qa.json",
+      "bytes": 1345,
+      "sha256": "23c9260141fc7d8995eac181f7204d5ce33b1e01de951dbcb582bb724c768bb9"
+    },
+    {
+      "path": "evidence/screenshots/login-de.png",
+      "bytes": 88497,
+      "sha256": "d6ddbc0a7362977e94d387896a578858e1fc449d9e1cd6271792f6a7241b5e15"
+    },
+    {
+      "path": "evidence/screenshots/login-en.png",
+      "bytes": 80797,
+      "sha256": "81837676c7a95fef1c409c06f151ce1bcedc48893ce4a6b4adec637282ba3f03"
+    },
+    {
+      "path": "evidence/screenshots/workspace-de-mobile.png",
+      "bytes": 155271,
+      "sha256": "b4237b5517500d4c5aa14bfaf63f06879d06701883929229f23174916e345874"
+    },
+    {
+      "path": "evidence/screenshots/workspace-de.png",
+      "bytes": 190592,
+      "sha256": "5ee9556ad37d595cfb9434e712cb14e034c6044eecee227d5fbd91e8d4da439a"
+    },
+    {
+      "path": "evidence/screenshots/workspace-en.png",
+      "bytes": 180606,
+      "sha256": "d1d011d86e64ea67ffd3c055490f242996ebd8528dd466019acd7ad5b33b9ed8"
+    },
+    {
+      "path": "evidence/tests/java-final.log",
+      "bytes": 3858,
+      "sha256": "057f05bcd6e15b01537d2005ae12510fceae9793632db2194242cd14823a2c65"
+    },
+    {
+      "path": "evidence/tests/java-tests.json",
+      "bytes": 9700,
+      "sha256": "1c06c84092b6ddde299dc597d1d3291c9e95c171c6ef92f3ebfbc4b4faf72531"
+    },
+    {
+      "path": "evidence/tests/java-tests.xml",
+      "bytes": 11655,
+      "sha256": "e74d4e26cc4b1c0eaf8abc0b749c5f01f242743ad599d347ce1869524cae78f7"
+    },
+    {
+      "path": "evidence/tests/python-final.log",
+      "bytes": 7318,
+      "sha256": "2e1158d7f3f365a9866cb3d96271686996cfe2eb16c5d1632e3b2c10a28db86a"
+    },
+    {
+      "path": "evidence/tests/python-tests.json",
+      "bytes": 11155,
+      "sha256": "d73f8fe7ec5cb03d3e874a184f5efc6b35bbd9fe1c11e934bc593c3f0a60d091"
+    },
+    {
+      "path": "evidence/tests/python-tests.xml",
+      "bytes": 7060,
+      "sha256": "a035dc1eff9bb18a1ae99a2cadb0c6e5f4cf85b3c317bee49036a07f803803a4"
+    },
+    {
+      "path": "evidence/tests/repository-final-check.log",
+      "bytes": 122,
+      "sha256": "e955b7c79cacde3103f1d1ffcd0da9c133c3ff9b755d8a289dcfd08f76cdc755"
+    },
+    {
+      "path": "evidence/verification.json",
+      "bytes": 1786,
+      "sha256": "7a81ed8478213b84e7eb5aa9fd74db6db5492e9ec8900e7ab18a772851d026f4"
+    },
+    {
+      "path": "integration/README-addition.de.md",
+      "bytes": 821,
+      "sha256": "d52bf589a89c2ba721f3ada79680337253a4c3fbf910b4d1e119c64d8ff42a2a"
+    },
+    {
+      "path": "integration/README-addition.en.md",
+      "bytes": 732,
+      "sha256": "2648641705dad0c1cb10bc1f22145bec75408a652969c399992dcaecce2df13b"
+    },
+    {
+      "path": "integration/governance-overlay.patch",
+      "bytes": 1178084,
+      "sha256": "b6fc005d27145a8e2c7e03add0f8175cc2dcd5c880269bc689dc3f9a92fe3ff5"
+    },
+    {
+      "path": "integration/src/main/java/io/github/ahadporkar/ordertocash/governance/spring/GovernanceConfiguration.java",
+      "bytes": 1952,
+      "sha256": "13744b46fd0f444f239d0e53cc895c39b8705e04331fd0748d3e1bb16f4a648e"
+    },
+    {
+      "path": "integration/src/main/java/io/github/ahadporkar/ordertocash/governance/spring/GovernanceController.java",
+      "bytes": 2569,
+      "sha256": "e6c172b0ace77290ea294c6b3eeb1f67cda997f48b460ee75686f04266ce6099"
+    },
+    {
+      "path": "integration/src/main/java/io/github/ahadporkar/ordertocash/governance/spring/GovernanceHttpBoundary.java",
+      "bytes": 2317,
+      "sha256": "bf3645873f917d4e5e613bb1208febf1c25225ce2300fbbd2a3d8b6c6533278e"
+    },
+    {
+      "path": "integration/src/main/java/io/github/ahadporkar/ordertocash/governance/spring/GovernanceOutboxRelay.java",
+      "bytes": 2311,
+      "sha256": "901f44ec04ec8e02596b524df38d2f4fd4a1611681337faa0e0399f208c0d0a9"
+    },
+    {
+      "path": "integration/src/main/java/io/github/ahadporkar/ordertocash/governance/spring/GovernanceWorkers.java",
+      "bytes": 1984,
+      "sha256": "5950f85db55fc950b07704e09f208e1a39b08593f2fe85aaa0c22b18a3b777f4"
+    },
+    {
+      "path": "integration/src/main/resources/application-governance.yml",
+      "bytes": 645,
+      "sha256": "888c7b7cb0e86e7ed39655aa38b91236a08cb3a34a38e68a15fde9f31206395f"
+    },
+    {
+      "path": "integration/src/main/resources/bpmn/governed-order-exception.bpmn",
+      "bytes": 10453,
+      "sha256": "6e6e5850882311215f51e3edc39389569b44bd3dd77f12e6269fc439d0ba998a"
+    },
+    {
+      "path": "integration/src/main/resources/db/migration/V100__governed_ai_workflow.sql",
+      "bytes": 460,
+      "sha256": "955e1ca70f1de7b3002cbee33a5c88afe6f8f9521d20815bbf93d1952b3a71c3"
+    },
+    {
+      "path": "integration/src/test/java/io/github/ahadporkar/ordertocash/governance/CoreReferenceTest.java",
+      "bytes": 348,
+      "sha256": "660f9fa0275868227b317390560bc74bc1af9c99a5e32608e3a84c98d0d9a066"
+    },
+    {
+      "path": "integration/src/test/java/io/github/ahadporkar/ordertocash/governance/PostgresGovernanceIT.java",
+      "bytes": 3095,
+      "sha256": "5a8f3629023708f4d754e3f27ae0d93b6c2a1eecacd6e0eb5ee3ca85fd19a98d"
+    },
+    {
+      "path": "openapi/governance.openapi.json",
+      "bytes": 19421,
+      "sha256": "9760b6a3ea8ee97fa0445064bfbc43d415e003daa361e5b4920322df4ed0df16"
+    },
+    {
+      "path": "publishing/Governed_AI_Workflow_Release_DE.pdf",
+      "bytes": 281373,
+      "sha256": "cf6d3eeae489cf68c6d86746bec1cde2f48418e30fac1ea7f22b117fcd262a50"
+    },
+    {
+      "path": "publishing/Governed_AI_Workflow_Release_EN.pdf",
+      "bytes": 270642,
+      "sha256": "87e7ef02b21afff26044a18b6a6850603ea52201b9c0db9a9c7a749d64e37374"
+    },
+    {
+      "path": "publishing/LinkedIn_Governed_AI_DE.pdf",
+      "bytes": 255613,
+      "sha256": "12fbe33274f1b578792d7bef1e851c1afdfe8c00ff926279994a6cec235b2409"
+    },
+    {
+      "path": "publishing/LinkedIn_Governed_AI_DE.pptx",
+      "bytes": 370387,
+      "sha256": "fb029bb103c0c918a52ce212b7900ba0f7eda0ef1d010eed972b23cf4212a9e6"
+    },
+    {
+      "path": "publishing/LinkedIn_Governed_AI_EN.pdf",
+      "bytes": 247137,
+      "sha256": "2eb0244e851951ca296b96054df737f39800722f0f07516354f3f48892556249"
+    },
+    {
+      "path": "publishing/LinkedIn_Governed_AI_EN.pptx",
+      "bytes": 360238,
+      "sha256": "01fd5b1adb91600fc79ef1d2d5d2fb6e394959bb96ca87f31d4f1f780ad21bb7"
+    },
+    {
+      "path": "publishing/PUBLISHING-CHECKLIST.md",
+      "bytes": 1240,
+      "sha256": "9754be46272732b5b3e48fb96ddad6431f5ce336537c1c3189f34eeab7f5404b"
+    },
+    {
+      "path": "publishing/linkedin-article.de.md",
+      "bytes": 6202,
+      "sha256": "d5aa04de489bd88e57f9b28f01292f45e0c7b0416f75eb25f9e3841603194722"
+    },
+    {
+      "path": "publishing/linkedin-article.en.md",
+      "bytes": 5818,
+      "sha256": "1cc769350b9be3167780d1d6e89dc842985a5c72dd911e84b690a999dc1867a0"
+    },
+    {
+      "path": "publishing/linkedin-post.de.md",
+      "bytes": 1708,
+      "sha256": "28bd6841b42bab90e18020a66b59dd5a1cd1c92241acc5ffb272bd7e00e06ca6"
+    },
+    {
+      "path": "publishing/linkedin-post.en.md",
+      "bytes": 1591,
+      "sha256": "bdd2ebe838f8105573c5b9ec7fa61cd4519fd2576a8265ad7731f2506ae15039"
+    },
+    {
+      "path": "publishing/portfolio-copy.de.md",
+      "bytes": 1180,
+      "sha256": "94e02b8fc2fab6d0d57a79a5ca4795e326f1ec448314a0e2abb9c27740075c6d"
+    },
+    {
+      "path": "publishing/portfolio-copy.en.md",
+      "bytes": 1318,
+      "sha256": "662ebc4fa38d7d32a15a3cc1077eb5fdb720e93a3c95cb3a27f81b964c1405b5"
+    },
+    {
+      "path": "requirements-browser.txt",
+      "bytes": 19,
+      "sha256": "df7696acf1e200684a962c8b7cb25363273b8239093235e68bb3f60231a9799f"
+    },
+    {
+      "path": "scripts/apply_overlay.py",
+      "bytes": 4415,
+      "sha256": "c4678a026d9784e571dafcb2c9d8f81ecebc6b7a2a47d54ebb4f5a388f0b1d2a"
+    },
+    {
+      "path": "scripts/build.cmd",
+      "bytes": 38,
+      "sha256": "b2115ee581bc8fa66b5b2644a82f67f86558cf8acbb3c3783ec015fe3f201be4"
+    },
+    {
+      "path": "scripts/build.py",
+      "bytes": 1288,
+      "sha256": "8e26eb05db9eb37f378d382d8bc0a2c01a5961e480d16e6d6dd358eca47e75b8"
+    },
+    {
+      "path": "scripts/build.sh",
+      "bytes": 63,
+      "sha256": "1545044d15e7812af316ac94f845014e4ecda42b8c334bfe2f871c1a564a62bf"
+    },
+    {
+      "path": "scripts/credentials.py",
+      "bytes": 1312,
+      "sha256": "42920873b71bfcc6969fc37440967c71a8c4ed4b090a6f9c178a031c3aa4536f"
+    },
+    {
+      "path": "scripts/evaluate.py",
+      "bytes": 886,
+      "sha256": "6d41917dfe69c41f56cfe66b3175682971e3ab4871eabb3b34d39b3038832b6d"
+    },
+    {
+      "path": "scripts/recovery_demo.py",
+      "bytes": 1555,
+      "sha256": "4cf4842165ac60f5f5db80660a5115b00a4168e1cafa7b8cb48c441cc59f2062"
+    },
+    {
+      "path": "scripts/run-demo.cmd",
+      "bytes": 41,
+      "sha256": "60bb9239b47836a916d25d7fbd9c4d8cf1f2e3375fc47366e2f829e06abd59a1"
+    },
+    {
+      "path": "scripts/run-demo.sh",
+      "bytes": 66,
+      "sha256": "2a465e0f4bb655dd00c1a14f3f21d05b68daab5310989f448f4387f257ba1efc"
+    },
+    {
+      "path": "scripts/run_demo.py",
+      "bytes": 2553,
+      "sha256": "d7a98d679bb06c15205691a5ed25452fa63e56fffbefd3c1686754df37152ae6"
+    },
+    {
+      "path": "scripts/stack_acceptance.py",
+      "bytes": 2783,
+      "sha256": "42f37dd3ee305bb571ba9ea584a4956e912c8618c00cb999fbf62cc03ef57179"
+    },
+    {
+      "path": "scripts/test.cmd",
+      "bytes": 37,
+      "sha256": "3a391303746a97bdb9ef325f79b4fa2420647b95765ba0ff3fdb614f3263096f"
+    },
+    {
+      "path": "scripts/test.py",
+      "bytes": 800,
+      "sha256": "8f650f8b5985f35de184bf567eed70296b1e81185e1df75bf6c242bf65f8dc78"
+    },
+    {
+      "path": "scripts/test.sh",
+      "bytes": 62,
+      "sha256": "b1098c7f72f4e15e665a5d3609bd78d869410e6f72d31e8d43d2ff86c6519223"
+    },
+    {
+      "path": "scripts/worker.py",
+      "bytes": 822,
+      "sha256": "e2ee4ed684542c67e92150dc278370f2c87e0c55f994290f4793005a4b8ba0f0"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/Actor.java",
+      "bytes": 627,
+      "sha256": "ac2de813376b0afcc4529162cb44dd4d1e5e25e5b3abc9e8c5c97f1570e534af"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/ApiRouter.java",
+      "bytes": 3702,
+      "sha256": "8ff94d7d8044aaab2ceb1ba3c4639a95a4cddf9882a89a9a255bc61abbbd586b"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/Audit.java",
+      "bytes": 1317,
+      "sha256": "d7146da4b846ae25e8faabbd2febd5b7171719c663f3e00e48676c400fd8d18d"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/Data.java",
+      "bytes": 2301,
+      "sha256": "9822abb5c810b8101e7217bde587737ca9eb27c883ea09c542209a7f9ecdc9a7"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/DemoFixtures.java",
+      "bytes": 1588,
+      "sha256": "a1b41d387e729604f0f8fb5d92dcb64e8d35a6a2aac9ee5411609495c646e4cf"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/DeterministicPlanner.java",
+      "bytes": 3064,
+      "sha256": "0106606e2844150a150accf082e7d09258755d12e071ddddb134f360f54e1fdc"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/FileStateStore.java",
+      "bytes": 4019,
+      "sha256": "fcfb41f33369b65bbf91067de4d583aeac281a6461e2ace34841733bc10d7429"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/GovernanceEngine.java",
+      "bytes": 19002,
+      "sha256": "f93b9dc589a4628fc3e06625370739116a0e5f09a038a0b7ce26c56abfcad07a"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/JdbcStateStore.java",
+      "bytes": 2200,
+      "sha256": "a005f59c4302cfa29138d9c97eea408258c133745a6f3b42df5ff84ff6ba0212"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/Json.java",
+      "bytes": 11032,
+      "sha256": "a7486c88d083f78a766b707a2386616d666ed9765b2574f8bd1dc6e4d387a5be"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/MemoryStore.java",
+      "bytes": 585,
+      "sha256": "e3ad7e561daf2ae62a3e25818a6d7446a4e5ea8a8c0624f0d43241f6817037e6"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/OllamaPlanner.java",
+      "bytes": 8362,
+      "sha256": "c9341d5615f2cb6b3b044bc578200356e66727eccf58faa46880a785bb2c4512"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/Planner.java",
+      "bytes": 485,
+      "sha256": "55182e146dcba01ec121e7212acac1bd9e7c30d84425d8e1d2fb7958d7cd83db"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/Policy.java",
+      "bytes": 3576,
+      "sha256": "6b2a1af04d57ff0209602db0cb2993d53196195080495d06441ef417272d4ae8"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/Problem.java",
+      "bytes": 593,
+      "sha256": "2accbe5d663e182fdaa2ba8c4def9d8c9bba87bb7edc3facded8d7a84ae93c06"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/Proposal.java",
+      "bytes": 1795,
+      "sha256": "71a781c8cfb0a3939defc1e53f3ba35ad06e1a295e8e4b3f53ff20e9bff23e45"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/ReadTools.java",
+      "bytes": 2412,
+      "sha256": "cd657900791eb8198fdf21886279c4cb53bdc63d738e83034adc698bd7227e36"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/StateStore.java",
+      "bytes": 1121,
+      "sha256": "ff09dd6ad6cec86b93b05a10d549e387ccb87d454135887a7e1456cc5736dc07"
+    },
+    {
+      "path": "src/main/java/io/github/ahadporkar/ordertocash/governance/TokenAuth.java",
+      "bytes": 2061,
+      "sha256": "f0b023d1795160c74a75ac4e5bf0dfeb90fc5e6675c9f706162da3a241811344"
+    },
+    {
+      "path": "tests/browser_test.py",
+      "bytes": 7456,
+      "sha256": "3bdf538bd72f42ccc4aad48c78b7c685a38820947d75d6bac598ced56b101d24"
+    },
+    {
+      "path": "tests/http_test.py",
+      "bytes": 7184,
+      "sha256": "1c60d443bd03d740d53205a4ca3b2fe5f426bee2629d376e17f99ab13a815838"
+    },
+    {
+      "path": "tests/java/io/github/ahadporkar/ordertocash/governance/tests/AllTests.java",
+      "bytes": 436,
+      "sha256": "c939167c331706549bd60ae794751424a47fea69bab99161b8952e490b014257"
+    },
+    {
+      "path": "tests/java/io/github/ahadporkar/ordertocash/governance/tests/CoreTests.java",
+      "bytes": 11852,
+      "sha256": "6c71298660e64f2586c47ac19bec4f1b523538112d1bc5ef1373d184064ffe7f"
+    },
+    {
+      "path": "tests/java/io/github/ahadporkar/ordertocash/governance/tests/ModelTests.java",
+      "bytes": 5232,
+      "sha256": "775b30ae46bd0b048d41f74e0b44e3eb563106cf51383abd1dffb08738ec1846"
+    },
+    {
+      "path": "tests/java/io/github/ahadporkar/ordertocash/governance/tests/SecurityTests.java",
+      "bytes": 9506,
+      "sha256": "84efdd3567d1be8d601e97d9cbee4dd5f229b1f6224f7336b468597eea44643f"
+    },
+    {
+      "path": "tests/java/io/github/ahadporkar/ordertocash/governance/tests/StorageTests.java",
+      "bytes": 3124,
+      "sha256": "d68d72478107e376ad5524da1da2af19c2054605eb1c072cbc3fe8ea33bc6148"
+    },
+    {
+      "path": "tests/java/io/github/ahadporkar/ordertocash/governance/tests/TestSupport.java",
+      "bytes": 4667,
+      "sha256": "8c5b0ed2e3bb6397a6c5d91c98a8a6a26cb48449e4e6119a94f5405ef92feb68"
+    },
+    {
+      "path": "tests/repository_test.py",
+      "bytes": 9116,
+      "sha256": "abbca4db9ce675c949c964560b3d79ead43b57751f66d260a145a445e5ade660"
+    },
+    {
+      "path": "tests/run_python.py",
+      "bytes": 2222,
+      "sha256": "bd7442cd7ee96cc4e75462de3b67842efc726f581706f0514976209ef1a61781"
+    },
+    {
+      "path": "tests/support.py",
+      "bytes": 4389,
+      "sha256": "f03c9b6ab6d7e83bed9a5b6da214e1b6f2bc3e1c3bc1fbec274679a821e84324"
+    },
+    {
+      "path": "web/app.js",
+      "bytes": 21406,
+      "sha256": "f2a08956052e07b093ed5246f6c69ade0ccd2751487041402317f07876c186c0"
+    },
+    {
+      "path": "web/icon.svg",
+      "bytes": 264,
+      "sha256": "64a7864632b966d3efdd83da39aaab8ace642ec23af42ef6b110e689408d6199"
+    },
+    {
+      "path": "web/index.html",
+      "bytes": 535,
+      "sha256": "888f852ca4e53b30e563bf39f4bd17b9f75b7b27ae512d5633caaaf1e22efbfb"
+    },
+    {
+      "path": "web/styles.css",
+      "bytes": 12882,
+      "sha256": "a66134b2a719bcdf95a68fa1deb82bbbbb54645d8eee68bced83251a9fcac76d"
+    }
+  ]
+}

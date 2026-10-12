@@ -1,0 +1,13 @@
+# Explicitly activate with SPRING_PROFILES_ACTIVE=governance.
+# Never enable this reference publicly without replacing demo authentication and reviewing host APIs.
+app:
+  governance:
+    enabled: ${GOVERNANCE_ENABLED:false}
+    seed-demo: ${GOVERNANCE_SEED_DEMO:false}
+    auth-file: ${GOVERNANCE_AUTH_FILE:}
+    allowed-origin: ${GOVERNANCE_ALLOWED_ORIGIN:http://localhost:8081}
+    planner: ${GOVERNANCE_PLANNER:baseline}
+    ollama-endpoint: ${GOVERNANCE_OLLAMA_ENDPOINT:http://127.0.0.1:11434/api/chat}
+    ollama-model: ${GOVERNANCE_OLLAMA_MODEL:}
+    events-topic: ${GOVERNANCE_EVENTS_TOPIC:governance.events}
+    outbox-interval-ms: 1000

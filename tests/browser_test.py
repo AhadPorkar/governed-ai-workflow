@@ -34,8 +34,11 @@ class BrowserTests(unittest.TestCase):
             self.page.add_script_tag(content=(ROOT/'web/app.js').read_text())
         else:raise RuntimeError('GOV_UI_TRANSPORT must be native or harness')
     def tearDown(self):self.context.close();self.s.close()
+    def wait_idle(self):
+        self.page.locator('#app:not(.busy)').wait_for(state='attached', timeout=10000)
+
     def login(self,role='reviewer'):
-        self.page.locator('#token').fill(self.s.tokens[role]);self.page.locator('#login-form button').click();self.page.locator('.case-row').first.wait_for()
+        self.page.locator('#token').fill(self.s.tokens[role]);self.page.locator('#login-form button').click();self.page.locator('.case-row').first.wait_for();self.wait_idle()
     def test_english_desktop_and_no_horizontal_overflow(self):
         self.login();self.page.locator(f'[data-case="{self.showcase["pending"]["id"]}"]').click();self.page.locator('#reason').fill('The captured balance and customer request match. I approve this exact sandbox refund.')
         self.assertLessEqual(self.page.evaluate('document.documentElement.scrollWidth'),1440);self.page.screenshot(path=str(ROOT/'build/screenshots/workspace-en.png'),full_page=True);self.assertEqual([],self.errors)
@@ -49,9 +52,11 @@ class BrowserTests(unittest.TestCase):
         c=self.s.plan(self.s.open('ORD-1002','Please cancel <img src=x onerror="window.xss=1">'))
         self.login('operator');self.page.locator(f'[data-case="{c["id"]}"]').click();self.assertIn('<img',self.page.locator('.request-box').inner_text());self.assertEqual(0,self.page.locator('.request-box img').count());self.assertIsNone(self.page.evaluate('window.xss'));self.assertEqual([],self.errors)
     def test_reviewer_can_decline_without_effect(self):
-        c=self.s.plan(self.s.open('ORD-1002','Please cancel this order.'));self.login();self.page.locator(f'[data-case="{c["id"]}"]').click();expect(self.page.locator('.detail-top h2')).to_contain_text(c['id'][:8]);self.page.locator('#reason').fill('Need confirmation before cancellation.');self.page.locator('button[value="decline"]').click();expect(self.page.locator('.detail-top')).to_contain_text('Declined');self.assertEqual('DECLINED',self.s.request('GET',f'/api/cases/{c["id"]}')[1]['state'])
+        c=self.s.plan(self.s.open('ORD-1002','Please cancel this order.'));self.login();self.page.locator(f'[data-case="{c["id"]}"]').click();expect(self.page.locator('.detail-top h2')).to_contain_text(c['id'][:8]);self.wait_idle();self.page.locator('#reason').fill('Need confirmation before cancellation.');
+        self.page.locator('button[value="decline"]').click();self.wait_idle();expect(self.page.locator('.detail-top')).to_contain_text('Declined',timeout=10000);self.assertEqual('DECLINED',self.s.request('GET',f'/api/cases/{c["id"]}')[1]['state'])
     def test_reviewer_approval_then_worker_receipt_visible(self):
-        c=self.s.plan(self.s.open('ORD-1002','Please cancel this order.'));self.login();self.page.locator(f'[data-case="{c["id"]}"]').click();expect(self.page.locator('.detail-top h2')).to_contain_text(c['id'][:8]);self.page.locator('#reason').fill('Unpaid order and verified cancellation request.');self.page.locator('button[value="approve"]').click();expect(self.page.locator('.detail-top')).to_contain_text('Approved');self.assertEqual(0,self.s.worker().returncode);self.page.locator('#refresh').click();self.page.locator('[data-tab="receipt"]').wait_for();self.page.locator('[data-tab="receipt"]').click();self.assertIn('"sandbox": true',self.page.locator('.tab-content').inner_text())
+        c=self.s.plan(self.s.open('ORD-1002','Please cancel this order.'));self.login();self.page.locator(f'[data-case="{c["id"]}"]').click();expect(self.page.locator('.detail-top h2')).to_contain_text(c['id'][:8]);self.wait_idle();self.page.locator('#reason').fill('Unpaid order and verified cancellation request.');
+        self.page.locator('button[value="approve"]').click();self.wait_idle();expect(self.page.locator('.detail-top')).to_contain_text('Approved',timeout=10000);self.assertEqual(0,self.s.worker().returncode);self.page.locator('#refresh').click();self.wait_idle();self.page.locator('[data-tab="receipt"]').wait_for();self.page.locator('[data-tab="receipt"]').click();self.assertIn('"sandbox": true',self.page.locator('.tab-content').inner_text())
     def test_signout_removes_token_and_protected_workspace(self):
         self.login();self.page.locator('#signout').click();self.page.locator('#token').wait_for();self.assertEqual(0,self.page.locator('.case-row').count());self.assertIsNone(self.page.evaluate('localStorage.getItem("token")'));self.assertEqual('',self.page.locator('#token').input_value())
     def test_login_visual_and_keyboard_access(self):
